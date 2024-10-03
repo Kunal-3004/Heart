@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Heart</string>
+    <string-array name="SEX">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="MCQ">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+</resources>
