@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val diabetesOptions = arrayOf("No", "Yes")
         val bpOptions = arrayOf("No", "Yes")
         val ca= arrayOf("No vessel colored","1 vessel colored","2 vessel colored","3 vessel colored","4 vessel colored")
-        val thal= arrayOf("Normal","Fixed Defect","Reverseible Defect","No evidence")
+        val thal= arrayOf("Normal","Fixed Defect","Reversible Defect","No evidence")
 
         val sexAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sexOptions)
         sexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -109,24 +109,42 @@ class MainActivity : AppCompatActivity() {
         val exang = binding.spinnerHype.selectedItemPosition
         val diabetes = binding.spinnerDia.selectedItemPosition
         val bpMedication = binding.spinnerBp.selectedItemPosition
-        val height = binding.edtHeight.text.toString().toFloatOrNull() ?: 0f
-        val weight = binding.edtWeight.text.toString().toFloatOrNull() ?: 0f
-        val heartRate = binding.edtHr.text.toString().toIntOrNull() ?: 0
-        val oldPeak = binding.edtOlp.text.toString().toFloatOrNull() ?: 0f
+        val height = binding.edtHeight.text.toString().toFloatOrNull()
+        val weight = binding.edtWeight.text.toString().toFloatOrNull()
+        val heartRate = binding.edtHr.text.toString().toIntOrNull()
+        val oldPeak = binding.edtOlp.text.toString().toFloatOrNull()
         val thalassemia = binding.spinnerThal.selectedItemPosition
         val ca=binding.spinnerCa.selectedItemPosition
 
+        if (height == null || height <= 0) {
+            showToast("Height must be a positive number.")
+            return
+        }
+        if (weight == null || weight <= 0) {
+            showToast("Weight must be a positive number.")
+            return
+        }
+        if (heartRate == null || heartRate <= 0) {
+            showToast("Heart Rate must be a positive number.")
+            return
+        }
+        if (oldPeak == null || oldPeak < 0) {
+            showToast("Old Peak must be a non-negative number.")
+            return
+        }
+
         val request = HeartDiseaseRequest(
-            chestPainType = binding.spinnerCpt.selectedItemPosition,
-            heartRate = binding.edtHr.text.toString().toIntOrNull() ?: 0,
-            exang = binding.spinnerHype.selectedItemPosition,
-            oldPeak = binding.edtOlp.text.toString().toFloatOrNull() ?: 0f,
-            ca = binding.spinnerCa.selectedItemPosition,
-            thalassemia = binding.spinnerThal.selectedItemPosition
+            chestPainType = chestPainType,
+            heartRate = heartRate,
+            exang = exang,
+            oldPeak = oldPeak,
+            ca = ca,
+            thalassemia = thalassemia
         )
 
         apiService.getPrediction(request).enqueue(object : Callback<PredictionResponse> {
             override fun onResponse(call: Call<PredictionResponse>, response: Response<PredictionResponse>) {
+                Log.d("API_REQUEST", "Request data: chestPainType=$chestPainType, heartRate=$heartRate, exang=$exang, oldPeak=$oldPeak, ca=$ca, thalassemia=$thalassemia")
                 if (response.isSuccessful) {
                     val predictionResponse = response.body()
                     if (predictionResponse != null) {
