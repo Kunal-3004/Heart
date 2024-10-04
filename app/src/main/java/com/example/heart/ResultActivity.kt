@@ -10,31 +10,59 @@ class ResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val result = intent.getStringExtra("result") ?: "No result"
-        val sex = intent.getIntExtra("sex", -1)
-        val age = intent.getIntExtra("age", -1)
-        val maxHeartRate = intent.getIntExtra("hrv", -1)
-        val smoking = intent.getIntExtra("Smoking", -1)
-        val exang = intent.getIntExtra("Exang", -1)
-        val stroke = intent.getIntExtra("Stroke", -1)
-        val diabetes = intent.getIntExtra("Diabetes", -1)
-        val bpMedication = intent.getIntExtra("bpMedication", -1)
-        val bodyMassIndex = intent.getFloatExtra("bodyMassIndex", -1f)
+        intent?.let {
+            binding.edtSex.text = it.getStringExtra("SEX")
+            binding.edtAge.text = it.getStringExtra("AGE")
+            binding.edtCurrSmoker.text = it.getStringExtra("Current Smoker")
+            binding.edtStroke.text = it.getStringExtra("Chest Pain Type")
+            binding.edtExng.text = it.getStringExtra("Exang")
+            binding.edtDiab.text = it.getStringExtra("Diabetes")
+            binding.edtBpm.text = it.getStringExtra("BP Medication")
+            binding.edtBmi.text = it.getStringExtra("BMI")
+            binding.edtMaxHr.text = it.getStringExtra("Heart Rate")
+            binding.edtRes.text = it.getStringExtra("Result")
+        }
 
-        // Set the data to the views
-        binding.edtRes.text = "Prediction Result: $result"
-        binding.edtSex.text = "Sex: $sex"
-        binding.edtAge.text = "Age: $age"
-        binding.edtMaxHr.text = "Max Heart Rate: $maxHeartRate"
-        binding.edtCurrSmoker.text = "Current Smoker: $smoking"
-        binding.edtExng.text = "Exercise Induced Angina: $exang"
-        binding.edtStroke.text = "Stroke: $stroke"
-        binding.edtDiab.text = "Diabetes: $diabetes"
-        binding.edtBpm.text = "Blood Pressure Medication: $bpMedication"
-        binding.edtBmi.text = "Body Mass Index: $bodyMassIndex"
+        /*binding.btnPdf.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            } else {
+                generatePdf()
+            }
+        }
+    }
+
+    private fun generatePdf() {
+        val pdfDocument = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(595, 842, 1).create()
+        val page = pdfDocument.startPage(pageInfo)
+
+        val content = binding.root
+        content.draw(page.canvas)
+
+        pdfDocument.finishPage(page)
+
+        val pdfFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "ResultReport.pdf")
+        try {
+            pdfFile.createNewFile()
+            val fos = FileOutputStream(pdfFile)
+            pdfDocument.writeTo(fos)
+            fos.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            pdfDocument.close()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            generatePdf()
+        }*/
     }
 }

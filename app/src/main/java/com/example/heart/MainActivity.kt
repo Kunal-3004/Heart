@@ -2,6 +2,7 @@ package com.example.heart
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.heart.databinding.ActivityMainBinding
@@ -20,14 +21,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        apiService = Retrofit.api
+        apiService = RetrofitInstance.api
 
         val sexOptions = arrayOf("Male", "Female")
         val smokerOptions = arrayOf("No", "Yes")
-        val strokeOptions = arrayOf("No", "Yes")
+        val chestPainType= arrayOf("Typical Angina","Atypical Angina","Non-Anginal Pain","Asymptomatic")
         val exangOptions = arrayOf("No", "Yes")
         val diabetesOptions = arrayOf("No", "Yes")
         val bpOptions = arrayOf("No", "Yes")
+        val ca= arrayOf("No vessel colored","1 vessel colored","2 vessel colored","3 vessel colored","4 vessel colored")
+        val thal= arrayOf("Normal","Fixed Defect","Reverseible Defect","No evidence")
 
         val sexAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sexOptions)
         sexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -37,9 +40,17 @@ class MainActivity : AppCompatActivity() {
         smokerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerSmoker.adapter = smokerAdapter
 
-        val strokeAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, strokeOptions)
-        strokeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerStroke.adapter = strokeAdapter
+        val cpAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, chestPainType)
+        smokerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCpt.adapter = cpAdapter
+
+        val caAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ca)
+        smokerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCa.adapter = caAdapter
+
+        val thalAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, thal)
+        smokerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerThal.adapter = thalAdapter
 
         val exangAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, exangOptions)
         exangAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -61,29 +72,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun check(): Boolean {
-        val cp = binding.edtCigs
-        val thalach = binding.edtHr
-        val oldpeak = binding.edtOldpeak
-        val ca = binding.edtCa
-        val age = binding.edtAge
-        val height = binding.edtHeight
-        val weight = binding.edtWeight
-        val thal = binding.edtThal
+        val oldpeak=binding.edtOlp
+        val age=binding.edtAge
+        val height=binding.edtHeight
+        val weight=binding.edtWeight
+        val heartRate=binding.edtHr
 
-        if (cp.text.toString().isEmpty() || !(cp.text.toString() in arrayOf("0", "1", "2", "3"))) {
-            cp.error = "Should be in 0-3 range"
-            return false
-        }
-        if (thalach.text.toString().isEmpty() || thalach.text.toString().toInt() < 0) {
-            thalach.error = "Cannot be empty or negative"
-            return false
-        }
         if (oldpeak.text.toString().isEmpty() || oldpeak.text.toString().toFloat() < 0) {
             oldpeak.error = "Cannot be empty or negative"
-            return false
-        }
-        if (ca.text.toString().isEmpty() || !(ca.text.toString() in arrayOf("0", "1", "2", "3", "4"))) {
-            ca.error = "Should be in 0-4 range"
             return false
         }
         if (age.text.toString().isEmpty() || age.text.toString().toInt() <= 0) {
@@ -98,8 +94,8 @@ class MainActivity : AppCompatActivity() {
             weight.error = "Weight cannot be empty or zero"
             return false
         }
-        if (thal.text.toString().isEmpty() || !(thal.text.toString() in arrayOf("0", "1", "2", "3"))) {
-            thal.error = "Should be in 0-3 range "
+        if (heartRate.text.toString().isEmpty() || heartRate.text.toString().toFloat() <= 0) {
+            heartRate.error = "Heart Rate cannot be empty or Zero "
             return false
         }
         return true
@@ -109,33 +105,24 @@ class MainActivity : AppCompatActivity() {
         val sex = binding.mySpinner.selectedItemPosition
         val age = binding.edtAge.text.toString().toIntOrNull() ?: 0
         val currentSmoker = binding.spinnerSmoker.selectedItemPosition
-        val chestPainType = binding.edtCigs.text.toString().toIntOrNull() ?: 0
-        val stroke = binding.spinnerStroke.selectedItemPosition
+        val chestPainType = binding.spinnerCpt.selectedItemPosition
         val exang = binding.spinnerHype.selectedItemPosition
         val diabetes = binding.spinnerDia.selectedItemPosition
         val bpMedication = binding.spinnerBp.selectedItemPosition
         val height = binding.edtHeight.text.toString().toFloatOrNull() ?: 0f
         val weight = binding.edtWeight.text.toString().toFloatOrNull() ?: 0f
         val heartRate = binding.edtHr.text.toString().toIntOrNull() ?: 0
-        val oldPeak = binding.edtOldpeak.text.toString().toFloatOrNull() ?: 0f
-        val thalassemia = binding.edtThal.text.toString().toIntOrNull() ?: 0
-        val ca = binding.edtCa.text.toString().toIntOrNull() ?: 0
+        val oldPeak = binding.edtOlp.text.toString().toFloatOrNull() ?: 0f
+        val thalassemia = binding.spinnerThal.selectedItemPosition
+        val ca=binding.spinnerCa.selectedItemPosition
 
         val request = HeartDiseaseRequest(
-            SEX = sex,
-            age = age,
-            currentSmoker,
-            chestPainType,
-            Stroke = stroke,
-            bpMedication,
-            Diabetes = diabetes,
-            Height = height,
-            Weight = weight,
-            heartRate,
-            Exang = exang,
-            Oldpeak = oldPeak,
-            ca = ca,
-            thalassemia = thalassemia
+            chestPainType = binding.spinnerCpt.selectedItemPosition,
+            heartRate = binding.edtHr.text.toString().toIntOrNull() ?: 0,
+            exang = binding.spinnerHype.selectedItemPosition,
+            oldPeak = binding.edtOlp.text.toString().toFloatOrNull() ?: 0f,
+            ca = binding.spinnerCa.selectedItemPosition,
+            thalassemia = binding.spinnerThal.selectedItemPosition
         )
 
         apiService.getPrediction(request).enqueue(object : Callback<PredictionResponse> {
@@ -145,22 +132,31 @@ class MainActivity : AppCompatActivity() {
                     if (predictionResponse != null) {
                         val intent = Intent(this@MainActivity, ResultActivity::class.java)
                         intent.putExtra("result", predictionResponse.result)
-                        intent.putExtra("sex", predictionResponse.sex)
-                        intent.putExtra("age", predictionResponse.age)
-                        intent.putExtra("hrv", predictionResponse.maxHeartRate)
-                        intent.putExtra("Smoking",predictionResponse.currentSmoker)
-                        intent.putExtra("Exang",predictionResponse.exang)
-                        intent.putExtra("Stroke",predictionResponse.stroke)
-                        intent.putExtra("Diabetes",predictionResponse.diabetes)
-                        intent.putExtra("bpMedication",predictionResponse.bpMedication)
-                        intent.putExtra("bodyMassIndex",predictionResponse.bmi)
-                        intent.putExtra("maxHeartRate",predictionResponse.maxHeartRate)
+                        intent.putExtra("sex", sex)
+                        intent.putExtra("age", age)
+                        intent.putExtra("chestPainType", chestPainType)
+                        intent.putExtra("heartRate", heartRate)
+                        intent.putExtra("smoker", currentSmoker)
+                        intent.putExtra("exang", exang)
+                        intent.putExtra("diabetes", diabetes)
+                        intent.putExtra("bpMedication", bpMedication)
+                        intent.putExtra("height", height)
+                        intent.putExtra("weight", weight)
+                        intent.putExtra("oldPeak", oldPeak)
+                        intent.putExtra("ca", ca)
+                        intent.putExtra("thalassemia", thalassemia)
                         startActivity(intent)
                     } else {
                         showToast("Prediction response is null")
                     }
                 } else {
-                    showToast("Failed to get prediction: ${response.message()}")
+                    if (response.code() == 500) {
+                        Log.e("PredictionError", "Internal Server Error: ${response.message()}")
+                        showToast("Internal Server Error: Please try again later.")
+                    } else {
+                        Log.e("PredictionError", "Code: ${response.code()}, Message: ${response.message()}")
+                        showToast("Failed to get prediction: ${response.message()}")
+                    }
                 }
             }
 

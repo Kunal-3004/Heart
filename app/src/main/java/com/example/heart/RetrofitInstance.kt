@@ -4,8 +4,8 @@ package com.example.heart
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object Retrofit{
-    private const val BASE_URL = "http://127.0.0.1:5000/"
+object RetrofitInstance{
+    private const val BASE_URL = "https://flaskproject-3-hrv1.onrender.com"
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
