@@ -3,6 +3,7 @@ agp = "8.5.2"
 androidPdfViewer = "3.2.0-beta.1"
 androidPdfViewerVersion = "3.2.0"
 bartekszczepanik = "android-pdf-viewer"
+heart = "Tag"
 kotlin = "1.8.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -22,6 +23,7 @@ android-pdf-viewer-v320 = { module = "com.github.barteksc:android-pdf-viewer", v
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 bartekszczepanik = { module = "com.github:BartekSzczepanik", version.ref = "bartekszczepanik" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+heart = { module = "com.github.Kunal-3004:Heart", version.ref = "heart" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

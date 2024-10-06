@@ -51,7 +51,6 @@ dependencies {
 
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
-    implementation(libs.bartekszczepanik)
 
     implementation (libs.androidxMultidex)
 
