@@ -1,6 +1,9 @@
 [versions]
 agp = "8.5.2"
-kotlin = "1.9.0"
+androidPdfViewer = "3.2.0-beta.1"
+androidPdfViewerVersion = "3.2.0"
+bartekszczepanik = "android-pdf-viewer"
+kotlin = "1.8.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -8,12 +11,16 @@ espressoCore = "3.6.1"
 appcompat = "1.7.0"
 loggingInterceptor = "4.9.3"
 material = "1.12.0"
-activity = "1.9.1"
+activity = "1.9.2"
+androidxMultidex = "2.0.1"
 constraintlayout = "2.1.4"
 retrofit = "2.9.0"
 
 [libraries]
+android-pdf-viewer = { module = "com.github.barteksc:android-pdf-viewer", version.ref = "androidPdfViewer" }
+android-pdf-viewer-v320 = { module = "com.github.barteksc:android-pdf-viewer", version.ref = "androidPdfViewerVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+bartekszczepanik = { module = "com.github:BartekSzczepanik", version.ref = "bartekszczepanik" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -24,8 +31,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+androidxMultidex = { module = "androidx.multidex:multidex", version.ref = "androidxMultidex" }  # Ensure this matches the correct version
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-

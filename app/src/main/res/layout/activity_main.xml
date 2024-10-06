@@ -1,266 +1,385 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/scrl_view"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
+    android:background="@color/strokeColor"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/spinner_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="SEX"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="66dp" />
-
-    <Spinner
-        android:id="@+id/my_spinner"
-        android:tooltipText="SEX"
-        app:layout_constraintTop_toBottomOf="@id/spinner_label"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="17dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/edtAge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Age"
-        android:textSize="16sp"
-        android:inputType="number"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/my_spinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"/>
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Information"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="26sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
-        android:id="@+id/tv_currSmoker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Smoker"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@id/edtAge"/>
+        <TextView
+            android:id="@+id/spinner_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Sex"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/heading"/>
 
-    <Spinner
-        android:id="@+id/spinner_smoker"
-        android:tooltipText="MCQ"
-        app:layout_constraintTop_toBottomOf="@id/tv_currSmoker"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        <Spinner
+            android:id="@+id/my_spinner"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintTop_toBottomOf="@id/spinner_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_spinner"/>
+
+        <EditText
+            android:id="@+id/edtAge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="16sp"
+            android:inputType="number"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_age"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <TextView
+            android:id="@+id/tv_currSmoker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Smoker"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtAge"/>
+
+        <Spinner
+            android:id="@+id/spinner_smoker"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_currSmoker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_cpt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chest Pain Type"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_smoker"/>
+
+        <Spinner
+            android:id="@+id/spinner_cpt"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_cpt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_exang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exang"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_cpt"/>
+
+        <Spinner
+            android:id="@+id/spinner_hype"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_exang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_dia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diabetes"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_hype"/>
+
+        <Spinner
+            android:id="@+id/spinner_dia"
+            android:layout_width="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_dia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_bp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BP Medication"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_dia"/>
+
+        <Spinner
+            android:id="@+id/spinner_bp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_bp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_ca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coronary Arteries"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_bp"/>
+
+        <Spinner
+            android:id="@+id/spinner_ca"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_ca"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Height"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_ca"/>
+
+        <EditText
+            android:id="@+id/edt_height"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Height in cm"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginStart="5dp"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/tv_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <TextView
+            android:id="@+id/tv_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_height"/>
+
+        <EditText
+            android:id="@+id/edt_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Weight in kg"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/tv_weight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <TextView
+            android:id="@+id/tv_Hr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thalach"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_weight"/>
+
+        <EditText
+            android:id="@+id/edt_Hr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Thalach"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/tv_Hr"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <TextView
+            android:id="@+id/tv_olp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Old Peak"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_Hr"/>
+
+        <EditText
+            android:id="@+id/edt_olp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Old Peak"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:inputType="numberDecimal"
+            app:layout_constraintTop_toBottomOf="@id/tv_olp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="8dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
 
 
-    <TextView
-        android:id="@+id/tv_cpt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chest Pain Type"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_smoker"/>
+        <TextView
+            android:id="@+id/tv_thal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thalassemia"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_olp"/>
 
-    <Spinner
-        android:id="@+id/spinner_cpt"
-        android:tooltipText="MCQ"
-        app:layout_constraintTop_toBottomOf="@id/tv_cpt"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        <Spinner
+            android:id="@+id/spinner_thal"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/spinner_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_thal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
+        <Button
+            android:id="@+id/btn_predict"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue"
+            android:text="Predict"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:padding="12dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            app:cornerRadius="8dp"
+            app:layout_constraintTop_toBottomOf="@id/spinner_thal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
-        android:id="@+id/tv_exang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Exang"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_cpt"/>
-
-    <Spinner
-        android:id="@+id/spinner_hype"
-        android:tooltipText="MCQ"
-        app:layout_constraintTop_toBottomOf="@id/tv_exang"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <TextView
-        android:id="@+id/tv_dia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Diabetes"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_hype"/>
-
-    <Spinner
-        android:id="@+id/spinner_dia"
-        android:tooltipText="MCQ"
-        app:layout_constraintTop_toBottomOf="@id/tv_dia"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <TextView
-        android:id="@+id/tv_bp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BP Medication"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_dia"/>
-
-    <Spinner
-        android:id="@+id/spinner_bp"
-        android:tooltipText="MCQ"
-        app:layout_constraintTop_toBottomOf="@id/tv_bp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-
-    <TextView
-        android:id="@+id/tv_ca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="coronary arteries"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@id/spinner_bp"/>
-
-    <Spinner
-        android:id="@+id/spinner_ca"
-        android:tooltipText="MCQ"
-        app:layout_constraintTop_toBottomOf="@id/tv_ca"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <EditText
-        android:id="@+id/edt_height"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Height in cm"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/spinner_ca"
-        app:layout_constraintStart_toStartOf="@id/spinner_ca"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-
-    <EditText
-        android:id="@+id/edt_weight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Weight in kg"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/edt_height"
-        app:layout_constraintStart_toStartOf="@id/edt_weight"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-
-    <EditText
-        android:id="@+id/edt_hr"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Heart Rate"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/edt_weight"
-        app:layout_constraintStart_toStartOf="@id/edt_weight"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-
-    <EditText
-        android:id="@+id/edt_olp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Old Peak"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@id/edt_hr"
-        app:layout_constraintStart_toStartOf="@id/edt_hr"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-
-
-    <Spinner
-        android:id="@+id/spinner_thal"
-        android:tooltipText="MCQ"
-        app:layout_constraintTop_toBottomOf="@id/tv_thal"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <TextView
-        android:id="@+id/tv_thal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thalassemia"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@id/edt_olp"/>
-
-    <Button
-        android:id="@+id/btn_predict"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/spinner_thal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="5dp"
-        android:text="Predict"
-        android:textStyle="bold"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

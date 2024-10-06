@@ -1,4 +1,4 @@
-package com.example.heart
+package com.example.heart.BACKENED
 
 data class HeartDiseaseRequest(
     val chestPainType: Int,
@@ -9,6 +9,6 @@ data class HeartDiseaseRequest(
     val thalassemia: Int
 )
 data class PredictionResponse(
-    val result: String,
+    val prediction: String,
     val features: List<Any>
 )

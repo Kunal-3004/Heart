@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.heart.BACKENED.Api
+import com.example.heart.BACKENED.HeartDiseaseRequest
+import com.example.heart.BACKENED.PredictionResponse
+import com.example.heart.BACKENED.RetrofitInstance
 import com.example.heart.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -102,7 +106,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun submitPredictionRequest() {
-        val sex = binding.mySpinner.selectedItemPosition
+        val sex = binding.mySpinner.selectedItem.toString()
         val age = binding.edtAge.text.toString().toIntOrNull() ?: 0
         val currentSmoker = binding.spinnerSmoker.selectedItemPosition
         val chestPainType = binding.spinnerCpt.selectedItemPosition
@@ -148,21 +152,24 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val predictionResponse = response.body()
                     if (predictionResponse != null) {
-                        val intent = Intent(this@MainActivity, ResultActivity::class.java)
-                        intent.putExtra("result", predictionResponse.result)
-                        intent.putExtra("sex", sex)
-                        intent.putExtra("age", age)
-                        intent.putExtra("chestPainType", chestPainType)
-                        intent.putExtra("heartRate", heartRate)
-                        intent.putExtra("smoker", currentSmoker)
-                        intent.putExtra("exang", exang)
-                        intent.putExtra("diabetes", diabetes)
-                        intent.putExtra("bpMedication", bpMedication)
-                        intent.putExtra("height", height)
-                        intent.putExtra("weight", weight)
-                        intent.putExtra("oldPeak", oldPeak)
-                        intent.putExtra("ca", ca)
-                        intent.putExtra("thalassemia", thalassemia)
+                        Log.d("PredictionResult", "Received result: ${predictionResponse.prediction}")
+                        val intent = Intent(this@MainActivity, ResultActivity::class.java).apply {
+                            putExtra("result", predictionResponse.prediction)
+                            putExtra("sex", sex)
+                            putExtra("age", age)
+                            putExtra("chestPainType", chestPainType)
+                            putExtra("heartRate", heartRate)
+                            putExtra("smoker", currentSmoker)
+                            putExtra("exang", exang)
+                            putExtra("diabetes", diabetes)
+                            putExtra("bpMedication", bpMedication)
+                            putExtra("height", height)
+                            putExtra("weight", weight)
+                            putExtra("oldPeak", oldPeak)
+                            putExtra("ca", ca)
+                            putExtra("thalassemia", thalassemia)
+                        }
+
                         startActivity(intent)
                     } else {
                         showToast("Prediction response is null")
