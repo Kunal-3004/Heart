@@ -21,6 +21,10 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.cardView2.setOnClickListener {
+            val intent=Intent(this,SkinDisease::class.java)
+            startActivity(intent)
+        }
+        binding.cardView3.setOnClickListener {
             val intent=Intent(this,InfoActivity::class.java)
             startActivity(intent)
         }

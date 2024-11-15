@@ -5,19 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/strokeColor"
+    android:background="@drawable/result_bg"
     tools:context=".ResultActivity">
 
-    <!-- Heading -->
     <TextView
         android:id="@+id/heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Quick Diagnosis Report"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/roboto_bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
