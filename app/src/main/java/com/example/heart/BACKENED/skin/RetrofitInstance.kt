@@ -23,7 +23,7 @@ object RetrofitInstance {
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
                     .addHeader("x-rapidapi-host", "detect-skin-disease1.p.rapidapi.com")
-                    .addHeader("x-rapidapi-key", "790108fef3msh9a03acc9bd524a4p17ce95jsn5c6972e306c")
+                    .addHeader("x-rapidapi-key", "790108fef3msh9a03acc9bd524a4p17ce95jsn5c6972e306c3")
                     .build()
                 chain.proceed(request)
             }

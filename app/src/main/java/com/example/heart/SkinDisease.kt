@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -145,7 +146,13 @@ class SkinDisease : AppCompatActivity() {
                             binding.resTxt.text = "Result: "
                             binding.predTxt.text = result
                         } else {
-                            Toast.makeText(this@SkinDisease, "Prediction failed: ${response.message()}", Toast.LENGTH_SHORT).show()
+                            val errorBody = response.errorBody()?.string()
+                            Log.e("API_ERROR_BODY", errorBody ?: "No error body")
+                            Toast.makeText(
+                                this@SkinDisease,
+                                "Prediction failed: Code ${response.code()}, Message: ${response.message()}, Error: $errorBody",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 } catch (e: Exception) {
